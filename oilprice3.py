@@ -46,7 +46,7 @@ def Show_oilprice(list):  # func  เเสดง ค่าน้ำมัน
           GasPrice[2], "BATH                          ****", )
     print("****                     4.Gasohol 91  ",
           GasPrice[3], "BATH                          ****", )
-    print("****                     5.Gasohol E20 ", f
+    print("****                     5.Gasohol E20 ", 
           GasPrice[4], "BATH                          ****", )
     print("****                     6.Gasohol 95  ",
           GasPrice[6], "BATH                          ****", )

@@ -1,10 +1,4 @@
-
-        # Oil price requested from PTT
-        #
-        # Vara Varavithya Sept 08 2020
-        #
-
-        # import related library for HTTP and XML
+# by pongsapak fungthawewong
 from zeep import Client
 
 from lxml import etree
@@ -15,24 +9,24 @@ result = client.service.CurrentOilPrice("en")
 
 root = etree.fromstring(result)
 
-        # define empty list
+# define empty list
 
 GasProduct = []
 GasPrice = []
 
-        # traverse oil price list and print out
-        # ทำการดึง ราคาน้ำมันจาก เว็บไชต์
-def Get_Oilprice():
+# traverse oil price list and print out
+
+
+def Get_Oilprice():  # func ดึงราคาน้ำมันจาก เว็บไชต์
     for r in root.xpath('FUEL'):
         product = r.xpath('PRODUCT/text()')[0]
         price = r.xpath('PRICE/text()') or [0]
-        GasProduct.append([product,float(price[0])])
+        GasProduct.append([product, float(price[0])])
         GasPrice.append(float(price[0]))
-    return GasPrice,GasProduct
+    return GasPrice, GasProduct
 
 
-
-def Main_Show():
+def Main_Show():  # func หน้า home
     print("\n\n********************************************************************************")
     print("****                                                                        ****")
     print("****                           OIL PRICE  PROGRAM                           ****")
@@ -41,7 +35,7 @@ def Main_Show():
     print("********************************************************************************\n\n")
 
 
-def Show_oilprice(list):       # เเสดง ค่าน้ำมัน
+def Show_oilprice(list):  # func  เเสดง ค่าน้ำมัน
     print("\n\n********************************************************************************")
     print("****                                                                        ****")
     print("****                     1.Gasoline 95 ",
@@ -52,12 +46,13 @@ def Show_oilprice(list):       # เเสดง ค่าน้ำมัน
           GasPrice[2], "BATH                          ****", )
     print("****                     4.Gasohol 91  ",
           GasPrice[3], "BATH                          ****", )
-    print("****                     5.Gasohol E20 ",
+    print("****                     5.Gasohol E20 ", f
           GasPrice[4], "BATH                          ****", )
     print("****                     6.Gasohol 95  ",
           GasPrice[6], "BATH                          ****", )
     print("****                                                                        ****")
     print("********************************************************************************")
+
 
 def Mains():
     print("\n\n********************************************************************************")
@@ -67,15 +62,17 @@ def Mains():
     print("****                                                                        ****")
     print("********************************************************************************\n\n")
 
-def Show_money(sums):
+
+def Show_money(sums):  # func  เเสดง เงิน
     print("********************************************************************************")
     print("****                                                                        ****")
-    print("****                        %.2f" % sums, "liter                                     ****")
+    print("****                        %.2f" %
+          sums, "liter                                     ****")
     print("****                                                                        ****")
     print("********************************************************************************\n\n")
-# เลือกระหว่าง เงินเป็นลิตร หรือ ลิตรเป็นเงิน
 
-def Show_liter(sums):
+
+def Show_liter(sums):  # func  เเสดง ลิตร
     print(
         "********************************************************************************")
     print(
@@ -87,17 +84,18 @@ def Show_liter(sums):
     print(
         "********************************************************************************\n\n")
 
-def Select_num(list):
+
+def Select_num(list):  # เลือกระหว่าง เงินเป็นลิตร หรือ ลิตรเป็นเงิน
     cal = int(input("\nSelect number :"))
-    if cal == 1 :
-       Money(list)
-    elif cal == 2 :
+    if cal == 1:
+        Money(list)
+    elif cal == 2:
         Liter(list)
     else:
         print("choice error'")
 
-def Money(list):
-    # คำณวน จาก เงินเป็นลิตร
+
+def Money(list):  # func คำณวน จาก เงินเป็นลิตร
     print("\nMoney to litre")
     oil = int(input("Type of oil :"))
     while oil > 6:
@@ -126,7 +124,8 @@ def Money(list):
     else:
         print("Error")
 
-def Liter(list):
+
+def Liter(list):  # func คำณวน จาก ลิตรเป็นเงิน
     print("\nlitre to money")
     oil = int(input("Type of oil :"))
     while oil > 6:
@@ -153,34 +152,37 @@ def Liter(list):
     else:
         print("Error")
 
-def GoOut(list):
+
+def GoOut(list):  # func go out
     print("********************************************************************************")
     print("****                                                                        ****")
     print("****                        Do You Go Or Exit                               ****")
     print("****                                                                        ****")
     print("********************************************************************************")
     ex = input("\nExit : ")
-    while True :
-          if ex == "" :
-              print("********************************************************************************")
-              print("****                                                                        ****")
-              print("****                          Exit Program                                  ****")
-              print("****                                                                        ****")
-              print("********************************************************************************")
-              break
-          else :
-              Main_Show()
-              Mains()
-              Show_oilprice(Get_Oilprice())
-              Select_num(list)
-              GoOut(list)
+    while True:
+        if ex == "":
+            print(
+                "********************************************************************************")
+            print(
+                "****                                                                        ****")
+            print(
+                "****                          Exit Program                                  ****")
+            print(
+                "****                                                                        ****")
+            print(
+                "********************************************************************************")
+            break
+        else:
+            Main_Show()
+            Mains()
+            Show_oilprice(Get_Oilprice())
+            Select_num(list)
+            GoOut(list)
+
 
 Main_Show()
 Mains()
 Show_oilprice(Get_Oilprice())
 Select_num(list)
 GoOut(list)
-
-
-
-
